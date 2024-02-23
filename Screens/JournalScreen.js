@@ -15,7 +15,10 @@ const JournalScreen = ({ navigation }) => {
       </View>
 
       <View style={styles.container}>
-      <Pressable style={styles.journalButton}>
+      <Pressable 
+      style={styles.questionnaireButton}
+      onPress={() => navigation.navigate("Questionnaire")}
+      >
         <Text style={styles.buttonText}>+</Text>
       </Pressable>
       </View>
@@ -30,7 +33,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  journalButton: {
+  questionnaireButton: {
     width: 70,
     height: 70,
     borderRadius: 35,
