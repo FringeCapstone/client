@@ -35,8 +35,8 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   navigationText: {
-    fontWeight: "bold",
-    fontSize: 20,
+    fontFamily: "BoldRedHatMono",
+    fontSize: 30,
     alignSelf: "center",
   },
   logo: {

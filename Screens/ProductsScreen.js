@@ -37,11 +37,12 @@ const styles = StyleSheet.create({
     margin: 5,
   },
   productText: {
+    fontFamily: "RegularRedHatMono",
     flex: 1,
     flexWrap: "wrap",
   },
   productHeader: {
-    fontWeight: "bold",
+    fontFamily: "BoldRedHatMono",
     flex: 1,
     flexWrap: "wrap",
   },
