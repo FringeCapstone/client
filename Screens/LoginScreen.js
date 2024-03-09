@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-native";
 import {auth} from "../firebase";
 import {useNavigation} from "@react-navigation/native";
+import profileScreen from "./ProfileScreen";
 
 const LoginScreen = () =>
 {
@@ -12,9 +13,11 @@ const LoginScreen = () =>
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(user =>
         {
+            // after user logs/signs in, redirect to profile
             if (user)
             {
-                alert(`already logged in as ${user.email}`);
+                alert(`logged in as ${user.email}`);
+                navigation.replace("Profile");
             }
         })
         return unsubscribe;

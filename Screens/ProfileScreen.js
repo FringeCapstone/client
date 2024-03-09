@@ -31,6 +31,9 @@ const ProfileScreen = ({ navigation, route }) => {
   }
   return (
       <View>
+        <Text>
+          Hello {auth.currentUser?.email}!
+        </Text>
         <View
           style={styles.buttonContainer}>
         <TouchableOpacity
