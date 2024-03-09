@@ -41,16 +41,7 @@ const LoginScreen = () =>
             })
             .catch(error => alert(error.message));
     }
-    const handleLogOut = () =>
-    {
-        auth
-            .signOut()
-            .then(() =>
-            {
-                console.log("Logged Out");
-            })
-            .catch(error => alert(error.message));
-    }
+
     return(
         <KeyboardAvoidingView
             style={styles.container}
@@ -77,15 +68,6 @@ const LoginScreen = () =>
                     onPress = {handleLogIn}
                     style={styles.button}>
                     <Text style ={styles.buttonText}> Login </Text>
-                </TouchableOpacity>
-
-            </View>
-            <View
-                style={styles.buttonContainer}>
-                <TouchableOpacity
-                    onPress = {handleLogOut}
-                    style={[styles.button, styles.buttonOutline]}>
-                    <Text style ={styles.buttonOutLineText}> Log Out </Text>
                 </TouchableOpacity>
 
             </View>
