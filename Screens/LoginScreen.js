@@ -15,7 +15,6 @@ const LoginScreen = () =>
             if (user)
             {
                 alert(`already logged in as ${user.email}`);
-                //navigation.replace("Home");
             }
         })
         return unsubscribe;
@@ -39,6 +38,16 @@ const LoginScreen = () =>
             .then(userCredentials => {
                 const user = userCredentials.user;
                 console.log("Logged in with: ", user.email);
+            })
+            .catch(error => alert(error.message));
+    }
+    const handleLogOut = () =>
+    {
+        auth
+            .signOut()
+            .then(() =>
+            {
+                console.log("Logged Out");
             })
             .catch(error => alert(error.message));
     }
@@ -68,6 +77,15 @@ const LoginScreen = () =>
                     onPress = {handleLogIn}
                     style={styles.button}>
                     <Text style ={styles.buttonText}> Login </Text>
+                </TouchableOpacity>
+
+            </View>
+            <View
+                style={styles.buttonContainer}>
+                <TouchableOpacity
+                    onPress = {handleLogOut}
+                    style={[styles.button, styles.buttonOutline]}>
+                    <Text style ={styles.buttonOutLineText}> Log Out </Text>
                 </TouchableOpacity>
 
             </View>
