@@ -22,11 +22,7 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen
-          name="Home"
-          component={HomeScreen}
-          // options={{title: 'Welcome'}}
-        />
+        <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Products" component={ProductsScreen} />
         <Stack.Screen name="Profile" component={ProfileScreen} />
         <Stack.Screen name="Journal" component={JournalScreen} />
