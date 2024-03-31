@@ -4,7 +4,7 @@ import {auth} from "../firebase";
 import {useNavigation} from "@react-navigation/native";
 import profileScreen from "./ProfileScreen";
 
-const LoginScreen = () =>
+const SignUpScreen = () =>
 {
     const[email, setEmail] = useState('');
     const[password, setPassword] = useState('');
@@ -25,71 +25,41 @@ const LoginScreen = () =>
 
     const handleSignUp = () =>
     {
-        navigation.replace("SignUp");
-        // auth
-        //     .createUserWithEmailAndPassword(email,password)
-        //     .then(userCredentials => {
-        //         const user = userCredentials.user;
-        //         console.log("Registered with: ", user.email);
-        //     })
-        //     .catch(error => alert(error.message));
-    }
-
-    const handleLogIn = () =>
-    {
         auth
-            .signInWithEmailAndPassword(email,password)
+            .createUserWithEmailAndPassword(email,password)
             .then(userCredentials => {
                 const user = userCredentials.user;
-                console.log("Logged in with: ", user.email);
+                console.log("Registered with: ", user.email);
             })
             .catch(error => alert(error.message));
     }
-
-    return(
-        <KeyboardAvoidingView
-            style={styles.container}
-            behavior={"padding"}>
+    return (
+        <KeyboardAvoidingView>
             <View style = {styles.inputContainer}>
                 <TextInput
                     placeholder="Email"
                     value = {email}
                     onChangeText={text => setEmail(text)}
-                    style = {styles.input}
                 />
+
                 <TextInput
                     placeholder="Password"
                     value = {password}
                     onChangeText={text => setPassword(text) }
-                    style = {styles.input}
                     secureTextEntry
                 />
-
             </View>
-            <View
-                style={styles.buttonContainer}>
-                <TouchableOpacity
-                    onPress = {handleLogIn}
-                    style={styles.button}>
-                    <Text style ={styles.buttonText}> Login </Text>
-                </TouchableOpacity>
-
-            </View>
-            <View
-                style={styles.buttonContainer}>
-                <TouchableOpacity
-                    onPress = {handleSignUp}
-                    style={[styles.button, styles.buttonOutline]}>
-                    <Text style ={styles.buttonOutLineText}> Don't have an account? Sign up here! </Text>
-                </TouchableOpacity>
-
-            </View>
+            <TouchableOpacity
+                onPress = {handleSignUp}
+                style={[styles.button, styles.buttonOutline]}>
+                <Text style ={styles.buttonOutLineText}> Submit </Text>
+            </TouchableOpacity>
         </KeyboardAvoidingView>
-    );
+    )
 }
-export default LoginScreen
+export default SignUpScreen
 
-const styles ={
+const styles = StyleSheet.create({
     container: {
         justifyContent: 'center',
         alignItems: 'center',
@@ -103,7 +73,9 @@ const styles ={
         marginTop: '5'
     },
     inputContainer: {
-        width: '80%'
+        width: '80%',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     buttonContainer: {
         width: '60%',
@@ -113,7 +85,7 @@ const styles ={
     },
     button: {
         backgroundColor: 'azure',
-        width: '100%',
+        width: '80%',
         padding: 15,
         borderRadius: 10,
         alignItems: 'center'
@@ -133,4 +105,4 @@ const styles ={
         fontSize: 16
     }
 
-};
+});
