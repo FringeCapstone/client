@@ -1,12 +1,27 @@
-import { Pressable, StyleSheet, Text, View, TextInput} from "react-native";
+import { Pressable, StyleSheet, Text, View, TextInput } from "react-native";
 import React, { useState } from "react";
 import SelectDropdown from "react-native-select-dropdown";
+import Checkbox from "expo-checkbox";
 
 const QuestionnaireScreen = ({ navigation }) => {
   const [number, onChangeNumber] = React.useState("");
   const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [selectedCheckboxes, setSelectedCheckboxes] = useState([]);
   const handleNextQuestion = () => {
     setCurrentQuestion(currentQuestion + 1);
+  };
+  const handleCheckboxChange = (option) => {
+    if (selectedCheckboxes.includes(option)) {
+      setSelectedCheckboxes(
+        selectedCheckboxes.filter((item) => item !== option)
+      );
+    } else {
+      setSelectedCheckboxes([...selectedCheckboxes, option]);
+    }
+  };
+
+  const updateSelectedCheckboxes = () => {
+    console.log("Selected Checkboxes:", selectedCheckboxes);
   };
 
   const QuestionInfo = ({ type }) => {
@@ -51,9 +66,10 @@ const QuestionnaireScreen = ({ navigation }) => {
           />
           <Pressable
             style={styles.button}
-            // onPress={(handleNextQuestion) => {
-            //   console.log(number);
-            // }}
+            onPress={() => {
+              handleNextQuestion();
+              console.log(number);
+            }}
           >
             <Text style={styles.buttonText}>Next</Text>
           </Pressable>
@@ -65,14 +81,44 @@ const QuestionnaireScreen = ({ navigation }) => {
           <Text style={styles.questionText}>
             {Questions[currentQuestion].question}
           </Text>
-
-          <Pressable style={styles.button} onPress={handleNextQuestion}>
+          <View>
+            {Questions[currentQuestion].options.map((answer, index) => (
+              <View style={styles.optionContainer} key={index}>
+                <Checkbox
+                  style={styles.checkbox}
+                  value={selectedCheckboxes.includes(answer)}
+                  onValueChange={() => handleCheckboxChange(answer)}
+                  color={
+                    selectedCheckboxes.includes(answer) ? "#4630EB" : undefined
+                  }
+                />
+                <Text>{answer}</Text>
+              </View>
+            ))}
+          </View>
+          <Pressable
+            style={styles.button}
+            onPress={() => {
+              handleNextQuestion();
+              updateSelectedCheckboxes();
+            }}
+          >
             <Text style={styles.buttonText}>Next</Text>
           </Pressable>
         </View>
       );
     } else {
-      content = <Text>Error</Text>;
+      content = (
+        <View style={styles.mainView}>
+          <Text style={styles.questionText}>Finished!</Text>
+          <Pressable
+            style={styles.button}
+            onPress={() => navigation.navigate("Home")}
+          >
+            <Text style={styles.buttonText}>Back Home</Text>
+          </Pressable>
+        </View>
+      );
     }
     return <View>{content}</View>;
   };
@@ -92,7 +138,12 @@ const QuestionnaireScreen = ({ navigation }) => {
     },
     {
       question: "What products have you tried?",
-      options: ["Gummies", "Red Light Mask", "Red Light Panel", "None"],
+      options: [
+        "Gummies",
+        "Red Light Mask",
+        "Red Light Panel",
+        "Red Light Therapy Wrap",
+      ],
       answer: ["None"],
       type: ["multiple choice"],
     },
@@ -166,5 +217,12 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 10,
     borderRadius: 8,
+  },
+  optionContainer: {
+    marginBottom: 10,
+    flexDirection: "row",
+  },
+  checkbox: {
+    marginLeft: 10,
   },
 });
