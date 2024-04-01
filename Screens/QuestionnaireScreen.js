@@ -1,12 +1,15 @@
 import { Pressable, StyleSheet, Text, View, TextInput } from "react-native";
 import React, { useState } from "react";
 import SelectDropdown from "react-native-select-dropdown";
+import { AirbnbRating } from "react-native-ratings";
 import Checkbox from "expo-checkbox";
 
 const QuestionnaireScreen = ({ navigation }) => {
   const [number, onChangeNumber] = React.useState("");
   const [currentQuestion, setCurrentQuestion] = useState(0);
+  let ratingFinal = 0;
   const [selectedCheckboxes, setSelectedCheckboxes] = useState([]);
+
   const handleNextQuestion = () => {
     setCurrentQuestion(currentQuestion + 1);
   };
@@ -19,7 +22,12 @@ const QuestionnaireScreen = ({ navigation }) => {
       setSelectedCheckboxes([...selectedCheckboxes, option]);
     }
   };
-
+  const ratingCompleted = (rating) => {
+    ratingFinal = rating;
+  };
+  const logRating = () => {
+    console.log("Rating: " + ratingFinal);
+  };
   const updateSelectedCheckboxes = () => {
     console.log("Selected Checkboxes:", selectedCheckboxes);
   };
@@ -107,6 +115,30 @@ const QuestionnaireScreen = ({ navigation }) => {
           </Pressable>
         </View>
       );
+    } else if (type == "rating") {
+      content = (
+        <View style={styles.mainView}>
+          <Text style={styles.questionText}>
+            {Questions[currentQuestion].question}
+          </Text>
+          <AirbnbRating
+            count={10}
+            reviews={[""]}
+            defaultRating={10}
+            size={20}
+            onFinishRating={ratingCompleted}
+          />
+          <Pressable
+            style={styles.button}
+            onPress={() => {
+              handleNextQuestion();
+              logRating();
+            }}
+          >
+            <Text style={styles.buttonText}>Next</Text>
+          </Pressable>
+        </View>
+      );
     } else {
       content = (
         <View style={styles.mainView}>
@@ -146,6 +178,12 @@ const QuestionnaireScreen = ({ navigation }) => {
       ],
       answer: ["None"],
       type: ["multiple choice"],
+    },
+    {
+      question: "How would you rate the product?",
+      options: ["Not Applicable"],
+      answer: ["Not Applicable"],
+      type: ["rating"],
     },
     {
       question: "Final",
