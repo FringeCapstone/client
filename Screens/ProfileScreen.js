@@ -29,6 +29,10 @@ const ProfileScreen = ({ navigation, route }) => {
         })
         .catch(error => alert(error.message));
   }
+  const handlePasswordChange = () =>
+  {
+      navigation.replace("PasswordChange");
+  }
   return (
       <View>
         <Text>
@@ -36,6 +40,11 @@ const ProfileScreen = ({ navigation, route }) => {
         </Text>
         <View
           style={styles.buttonContainer}>
+          <TouchableOpacity
+              onPress = {handlePasswordChange}
+              style={[styles.button, styles.buttonOutline]}>
+            <Text style ={styles.buttonOutLineText}> Change Password </Text>
+          </TouchableOpacity>
         <TouchableOpacity
             onPress = {handleLogOut}
             style={[styles.button, styles.buttonOutline]}>
