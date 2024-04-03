@@ -2,21 +2,21 @@ import { StyleSheet, Text, View, Image } from "react-native";
 
 const ProductsScreen = ({ navigation, route }) => {
   return (
-    <View>
-      <View style={styles.productRow}>
-        <Image
-          style={styles.productImage}
-          source={{
-            uri: "https://fringeheals.com/wp-content/uploads/2023/12/Copy-of-Red-Light-Face-Mask-Instagram-Post-1.jpg",
-          }}
-        />
-        <Text style={styles.productText}>
-          <Text style={styles.productHeader}>red light face mask{"\n"}</Text>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestias
-          aut, repellat ipsum facere voluptate dicta
-        </Text>
+      <View>
+        <View style={styles.productRow}>
+          <Image
+              style={styles.productImage}
+              source={{
+                uri: "https://fringeheals.com/wp-content/uploads/2023/12/Copy-of-Red-Light-Face-Mask-Instagram-Post-1.jpg",
+              }}
+          />
+          <Text style={styles.productText}>
+            <Text style={styles.productHeader}>red light face mask{"\n"}</Text>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestias
+            aut, repellat ipsum facere voluptate dicta
+          </Text>
+        </View>
       </View>
-    </View>
   );
 };
 export default ProductsScreen;
@@ -37,11 +37,12 @@ const styles = StyleSheet.create({
     margin: 5,
   },
   productText: {
+    fontFamily: "RegularRedHatMono",
     flex: 1,
     flexWrap: "wrap",
   },
   productHeader: {
-    fontWeight: "bold",
+    fontFamily: "BoldRedHatMono",
     flex: 1,
     flexWrap: "wrap",
   },
