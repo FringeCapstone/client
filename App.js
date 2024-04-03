@@ -15,13 +15,13 @@ const Stack = createNativeStackNavigator();
 
 const App = () => {
   // app won't launch if it cannot resolve these files
-  // const [loaded] = useFonts({
-  //   RegularRedHatMono: require("./assets/fonts/RedHatMono-VariableFont_wght.ttf"),
-  //   BoldRedHatMono: require("./assets/fonts/static/RedHatMono-Bold.ttf"),
-  // });
-  // if (!loaded) {
-  //   return null;
-  // }
+  const [loaded] = useFonts({
+    RegularRedHatMono: require("./assets/fonts/RedHatMono-VariableFont_wght.ttf"),
+    BoldRedHatMono: require("./assets/fonts/static/RedHatMono-Bold.ttf"),
+  });
+  if (!loaded) {
+    return null;
+  }
   return (
     <NavigationContainer>
       <Stack.Navigator>
