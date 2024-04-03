@@ -14,13 +14,14 @@ import QuestionnaireScreen from "./Screens/QuestionnaireScreen";
 const Stack = createNativeStackNavigator();
 
 const App = () => {
-  const [loaded] = useFonts({
-    RegularRedHatMono: require("./assets/fonts/RedHatMono-VariableFont_wght.ttf"),
-    BoldRedHatMono: require("./assets/fonts/static/RedHatMono-Bold.ttf"),
-  });
-  if (!loaded) {
-    return null;
-  }
+  // app won't launch if it cannot resolve these files
+  // const [loaded] = useFonts({
+  //   RegularRedHatMono: require("./assets/fonts/RedHatMono-VariableFont_wght.ttf"),
+  //   BoldRedHatMono: require("./assets/fonts/static/RedHatMono-Bold.ttf"),
+  // });
+  // if (!loaded) {
+  //   return null;
+  // }
   return (
     <NavigationContainer>
       <Stack.Navigator>
