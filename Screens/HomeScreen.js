@@ -25,6 +25,10 @@ const HomeScreen = ({ navigation }) => {
       >
         <Text style={styles.navigationText}>profile</Text>
       </Pressable>
+      <Image
+        style={styles.imageStyle}
+        source={require('../assets/imgs/plants_heal_fringe.png')}
+      />
     </View>
   );
 };
@@ -33,16 +37,23 @@ export default HomeScreen;
 const styles = StyleSheet.create({
   navigationButton: {
     margin: 10,
+    borderWidth: 2,
   },
   navigationText: {
-    fontWeight: "bold",
-    fontSize: 20,
+    fontFamily: "BoldRedHatMono",
+    fontSize: 40,
     alignSelf: "center",
   },
   logo: {
     margin: 5,
     resizeMode: "contain",
     alignSelf: "center",
-    height: "20%",
+    height: 100,
+  },
+  imageStyle: {
+    resizeMode: "contain",
+    alignSelf: "center",
+    width: 200,
+    height: 200,
   },
 });
