@@ -12,7 +12,7 @@ const ProfileScreen = ({ navigation, route }) => {
     {
       if (!user)
       {
-        alert('Please log in before accessing journals.');
+        alert('Please log in before accessing your profile.');
         myNav.replace("LogIn");
       }
 

@@ -9,7 +9,7 @@ const JournalScreen = ({ navigation }) => {
     {
       if (!user)
       {
-        alert('not logged in!');
+        alert('Please log in before accessing your journals.');
         navigation.replace("LogIn");
       }
 
