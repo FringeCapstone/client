@@ -55,13 +55,13 @@ const LoginScreen = () =>
                     placeholder="Email"
                     value = {email}
                     onChangeText={text => setEmail(text)}
-                    style = {styles.input}
+                    style = {styles.myInput}
                 />
                 <TextInput
                     placeholder="Password"
                     value = {password}
                     onChangeText={text => setPassword(text) }
-                    style = {styles.input}
+                    style = {styles.myInput}
                     secureTextEntry
                 />
 
@@ -95,7 +95,7 @@ const styles ={
         alignItems: 'center',
         flex: 1
     },
-    input:{
+    myInput:{
         backgroundColor: 'white',
         paddingHorizontal: '15',
         paddingVertical: '10',
