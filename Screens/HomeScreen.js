@@ -25,6 +25,12 @@ const HomeScreen = ({ navigation }) => {
       >
         <Text style={styles.navigationText}>profile</Text>
       </Pressable>
+      <Pressable
+          style={styles.navigationButton}
+          onPress={() => navigation.navigate("LogIn")}
+      >
+          <Text style={styles.navigationText}>login</Text>
+      </Pressable>
       <Image
         style={styles.imageStyle}
         source={require('../assets/imgs/plants_heal_fringe.png')}

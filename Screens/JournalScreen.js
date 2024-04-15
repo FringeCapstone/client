@@ -12,6 +12,10 @@ const JournalScreen = ({ navigation }) => {
         alert('Please log in before accessing your journals.');
         navigation.replace("LogIn");
       }
+      else
+      {
+
+      }
 
     })
     return unsubscribe;
