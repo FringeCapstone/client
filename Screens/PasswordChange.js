@@ -28,7 +28,7 @@ const PassWordChange = () =>
                 <TextInput
                     placeholder="Enter new password here"
                     value = {password}
-                    style = styles.input
+                    style = {styles.input}
                     onChangeText={text => setPassword(text) }
                     secureTextEntry
                 />

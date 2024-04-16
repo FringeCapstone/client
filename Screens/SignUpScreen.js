@@ -37,14 +37,14 @@ const SignUpScreen = () =>
         <KeyboardAvoidingView>
             <View style = {styles.inputContainer}>
                 <TextInput
-                    style = styles.input
+                    style = {styles.input}
                     placeholder="Email"
                     value = {email}
                     onChangeText={text => setEmail(text)}
                 />
 
                 <TextInput
-                    style = styles.input
+                    style = {styles.input}
                     placeholder="Password"
                     value = {password}
                     onChangeText={text => setPassword(text) }
