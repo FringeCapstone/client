@@ -1,6 +1,25 @@
 import { Pressable, StyleSheet, Text, View} from "react-native";
+import {useEffect} from "react";
+import {useNavigation} from "@react-navigation/native";
+import {auth} from "../firebase";
 
 const JournalScreen = ({ navigation }) => {
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(user =>
+    {
+      if (!user)
+      {
+        alert('Please log in before accessing your journals.');
+        navigation.replace("LogIn");
+      }
+      else
+      {
+
+      }
+
+    })
+    return unsubscribe;
+  })
   return (
       <View style={{flex: 1}}>
         <View style={styles.journalRow}>
