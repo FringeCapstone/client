@@ -28,6 +28,7 @@ const PassWordChange = () =>
                 <TextInput
                     placeholder="Enter new password here"
                     value = {password}
+                    style = styles.input
                     onChangeText={text => setPassword(text) }
                     secureTextEntry
                 />
@@ -49,10 +50,10 @@ const styles ={
     },
     input:{
         backgroundColor: 'white',
-        paddingHorizontal: '15',
-        paddingVertical: '10',
-        borderRadius: '5',
-        marginTop: '5'
+        paddingHorizontal: 15,
+        paddingVertical: 10,
+        borderRadius: 5,
+        marginTop: 5
     },
     inputContainer: {
         width: '80%'
