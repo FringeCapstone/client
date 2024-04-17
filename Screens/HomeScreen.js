@@ -1,6 +1,12 @@
 import { StyleSheet, Text, View, Image, Pressable } from "react-native";
+import {useEffect} from "react";
+import {auth} from "../firebase";
 
 const HomeScreen = ({ navigation }) => {
+    function renderText()
+    {
+
+    }
   return (
     <View>
       <Image
@@ -25,12 +31,15 @@ const HomeScreen = ({ navigation }) => {
       >
         <Text style={styles.navigationText}>profile</Text>
       </Pressable>
-      <Pressable
-          style={styles.navigationButton}
-          onPress={() => navigation.navigate("LogIn")}
-      >
-          <Text style={styles.navigationText}>login</Text>
+      <View>
+          {this.renderText()}
+        <Pressable
+            style={styles.navigationButton}
+            onPress={() => navigation.navigate("LogIn")}
+        >
+            <Text style={styles.navigationText}>login</Text>
       </Pressable>
+      </View>
       <Image
         style={styles.imageStyle}
         source={require('../assets/imgs/plants_heal_fringe.png')}
