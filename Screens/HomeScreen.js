@@ -1,12 +1,31 @@
 import { StyleSheet, Text, View, Image, Pressable } from "react-native";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {auth} from "../firebase";
 
 const HomeScreen = ({ navigation }) => {
-    function renderText()
-    {
+    const [loggedInText, setLoggedInText] = useState("");
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged(user => {
+            if (!user) {
+                setLoggedInText(
+                    <Pressable
+                        style={styles.navigationButton}
+                        onPress={() => navigation.navigate("LogIn")}
+                    >
+                        <Text style={styles.navigationText}>login</Text>
+                    </Pressable>
+                );
+            } else {
+                setLoggedInText(
+                    <Text style={styles.navigationText}>
+                        Welcome, {user.email}!
+                    </Text>
+                );
+            }
+        });
 
-    }
+        return () => unsubscribe();
+    }, [navigation]);
   return (
     <View>
       <Image
@@ -32,13 +51,7 @@ const HomeScreen = ({ navigation }) => {
         <Text style={styles.navigationText}>profile</Text>
       </Pressable>
       <View>
-          {this.renderText()}
-        <Pressable
-            style={styles.navigationButton}
-            onPress={() => navigation.navigate("LogIn")}
-        >
-            <Text style={styles.navigationText}>login</Text>
-      </Pressable>
+          {loggedInText}
       </View>
       <Image
         style={styles.imageStyle}
