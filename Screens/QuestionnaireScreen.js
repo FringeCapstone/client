@@ -202,8 +202,10 @@ export default QuestionnaireScreen;
 
 const styles = StyleSheet.create({
     mainView: {
+        flex: 1,
         alignItems: "center",
-        marginTop: "40%",
+        justifyContent: "center",
+        marginTop: "20%",
     },
     button: {
         margin: 10,
