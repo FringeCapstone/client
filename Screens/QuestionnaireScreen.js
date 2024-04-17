@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, View, TextInput } from "react-native";
+import {Pressable, StyleSheet, Text, View, TextInput, Platform} from "react-native";
 import React, { useState } from "react";
 import SelectDropdown from "react-native-select-dropdown";
 import { AirbnbRating } from "react-native-ratings";
@@ -205,7 +205,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: "center",
         justifyContent: "center",
-        marginTop: "40%",
+        marginTop: Platform.OS === 'web' ? "20%" : "40%",
     },
     button: {
         margin: 10,
