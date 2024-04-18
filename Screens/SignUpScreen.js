@@ -29,7 +29,9 @@ const SignUpScreen = () =>
             .createUserWithEmailAndPassword(email,password)
             .then(userCredentials => {
                 const user = userCredentials.user;
-                const userToken = user.getIdToken();
+                const userToken = user.getIdToken().then(token => {
+                    // push to firestore here
+                }).catch(error => console.log(error.message));
             })
             .catch(error => alert(error.message));
     }
