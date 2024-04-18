@@ -30,8 +30,6 @@ const SignUpScreen = () =>
             .then(userCredentials => {
                 const user = userCredentials.user;
                 const userToken = user.getIdToken();
-                console.log("Registered with: ", user.email);
-                console.log("User Token: ", userToken);
             })
             .catch(error => alert(error.message));
     }
