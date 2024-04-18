@@ -16,7 +16,7 @@ const SignUpScreen = () =>
             // after user logs/signs in, redirect to profile
             if (user)
             {
-                alert(`logged in as ${user.email}`);
+                alert(`Account Successfully Created with ${user.email}`);
                 navigation.replace("Profile");
             }
         })
@@ -29,7 +29,9 @@ const SignUpScreen = () =>
             .createUserWithEmailAndPassword(email,password)
             .then(userCredentials => {
                 const user = userCredentials.user;
+                const userToken = user.getIdToken();
                 console.log("Registered with: ", user.email);
+                console.log("User Token: ", userToken);
             })
             .catch(error => alert(error.message));
     }
