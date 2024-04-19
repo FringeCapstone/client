@@ -3,7 +3,8 @@ import {KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, Vie
 import {auth} from "../firebase";
 import {useNavigation} from "@react-navigation/native";
 import profileScreen from "./ProfileScreen";
-
+import firestore from '@react-native-firebase/firestore';
+import firebase from "firebase/compat";
 const SignUpScreen = () =>
 {
     const[email, setEmail] = useState('');
@@ -31,6 +32,12 @@ const SignUpScreen = () =>
                 const user = userCredentials.user;
                 const userToken = user.getIdToken().then(token => {
                     // push to firestore here
+                    const firestore = firebase.firestore();
+                    firestore.collection("users").doc(user.uid).set({
+                        email: user.email,
+                    })
+                        .then(() => console.log("New User Added Successfully."))
+                        .catch((error) => console.log(error.message));
                 }).catch(error => console.log(error.message));
             })
             .catch(error => alert(error.message));
