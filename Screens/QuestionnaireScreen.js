@@ -9,7 +9,7 @@ const QuestionnaireScreen = ({ navigation }) => {
     const [currentQuestion, setCurrentQuestion] = useState(0);
     let ratingFinal = 0;
     const [selectedCheckboxes, setSelectedCheckboxes] = useState([]);
-
+    let responses = [];
     const handleNextQuestion = () => {
         setCurrentQuestion(currentQuestion + 1);
     };
