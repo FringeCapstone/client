@@ -35,6 +35,7 @@ const SignUpScreen = () =>
                     const firestore = firebase.firestore();
                     firestore.collection("users").doc(user.uid).set({
                         email: user.email,
+                        accountCreationTime: firestore.FieldValue.serverTimeStamp()
                     })
                         .then(() => console.log("New User Added Successfully."))
                         .catch((error) => console.log(error.message));
