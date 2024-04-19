@@ -12,6 +12,7 @@ const QuestionnaireScreen = ({ navigation }) => {
 
     function handleSubmission(response) {
         responses.push(response);
+        handleNextQuestion();
         console.log("adding " + response + " to responses.");
     }
     const handleNextQuestion = () => {
@@ -38,6 +39,7 @@ const QuestionnaireScreen = ({ navigation }) => {
 
     const QuestionInfo = ({ type }) => {
         let content;
+        let dropdownRes;
         if (type == "dropdown") {
             content = (
                 <View style={styles.mainView}>
@@ -54,12 +56,12 @@ const QuestionnaireScreen = ({ navigation }) => {
                             rowTextStyle={styles.rowText}
                             data={Questions[currentQuestion].options}
                             onSelect={(selectedItem, index) => {
-                                handleSubmission(selectedItem);
                                 // console.log(selectedItem, index);
+                                dropdownRes = selectedItem;
                             }}
                         />
                     </View>
-                    <Pressable style={styles.button} onPress={handleNextQuestion}>
+                    <Pressable style={styles.button} onPress={() => handleSubmission(dropdownRes)}>
                         <Text style={styles.buttonText}>Next</Text>
                     </Pressable>
                 </View>
@@ -81,8 +83,7 @@ const QuestionnaireScreen = ({ navigation }) => {
                         style={styles.button}
                         onPress={() => {
                             handleSubmission(number);
-                            handleNextQuestion();
-                            //console.log(number);
+                            // console.log(number);
                         }}
                     >
                         <Text style={styles.buttonText}>Next</Text>
@@ -114,7 +115,6 @@ const QuestionnaireScreen = ({ navigation }) => {
                         style={styles.button}
                         onPress={() => {
                             handleSubmission(selectedCheckboxes);
-                            handleNextQuestion();
                             updateSelectedCheckboxes();
                         }}
                     >
@@ -138,7 +138,6 @@ const QuestionnaireScreen = ({ navigation }) => {
                     <Pressable
                         style={styles.button}
                         onPress={() => {
-                            handleNextQuestion();
                             logRating();
                             handleSubmission(ratingFinal);
                             for (let i = 0; i < responses.length; i++)
