@@ -10,6 +10,10 @@ const QuestionnaireScreen = ({ navigation }) => {
     let ratingFinal = 0;
     const [selectedCheckboxes, setSelectedCheckboxes] = useState([]);
     let responses = [];
+    function handleSubmission(response) {
+        responses[responses.length] = response;
+        console.log(responses[responses.length-1]);
+    }
     const handleNextQuestion = () => {
         setCurrentQuestion(currentQuestion + 1);
     };
