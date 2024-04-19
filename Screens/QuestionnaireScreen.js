@@ -3,16 +3,16 @@ import React, { useState } from "react";
 import SelectDropdown from "react-native-select-dropdown";
 import { AirbnbRating } from "react-native-ratings";
 import Checkbox from "expo-checkbox";
-
+let responses = []; // must declare outside the func to avoid scoping issues
 const QuestionnaireScreen = ({ navigation }) => {
     const [number, onChangeNumber] = React.useState("");
     const [currentQuestion, setCurrentQuestion] = useState(0);
     let ratingFinal = 0;
     const [selectedCheckboxes, setSelectedCheckboxes] = useState([]);
-    let responses = [];
+
     function handleSubmission(response) {
-        responses[responses.length] = response;
-        console.log(responses[responses.length-1]);
+        responses.push(response);
+        console.log("adding " + response + " to responses.");
     }
     const handleNextQuestion = () => {
         setCurrentQuestion(currentQuestion + 1);
@@ -54,7 +54,8 @@ const QuestionnaireScreen = ({ navigation }) => {
                             rowTextStyle={styles.rowText}
                             data={Questions[currentQuestion].options}
                             onSelect={(selectedItem, index) => {
-                                console.log(selectedItem, index);
+                                handleSubmission(selectedItem);
+                                // console.log(selectedItem, index);
                             }}
                         />
                     </View>
@@ -79,8 +80,9 @@ const QuestionnaireScreen = ({ navigation }) => {
                     <Pressable
                         style={styles.button}
                         onPress={() => {
+                            handleSubmission(number);
                             handleNextQuestion();
-                            console.log(number);
+                            //console.log(number);
                         }}
                     >
                         <Text style={styles.buttonText}>Next</Text>
@@ -111,6 +113,7 @@ const QuestionnaireScreen = ({ navigation }) => {
                     <Pressable
                         style={styles.button}
                         onPress={() => {
+                            handleSubmission(selectedCheckboxes);
                             handleNextQuestion();
                             updateSelectedCheckboxes();
                         }}
@@ -137,6 +140,9 @@ const QuestionnaireScreen = ({ navigation }) => {
                         onPress={() => {
                             handleNextQuestion();
                             logRating();
+                            handleSubmission(ratingFinal);
+                            for (let i = 0; i < responses.length; i++)
+                                console.log(i + ": " + responses[i]);
                         }}
                     >
                         <Text style={styles.buttonText}>Next</Text>
