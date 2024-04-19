@@ -14,7 +14,9 @@ const JournalScreen = ({ navigation }) => {
       }
       else
       {
-
+        const userToken = user.getIdToken().then(token => {
+          // firestore stuff here
+        }).catch(error => console.log(error.message));
       }
 
     })
