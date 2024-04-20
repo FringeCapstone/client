@@ -20,7 +20,11 @@ const QuestionnaireScreen = ({ navigation }) => {
         const firestore = firebase.firestore();
         const user = firebase.auth().currentUser;
         firestore.collection("users").doc(user.uid).collection("journalEntries").add({
-            title: "test",
+            date: firebase.firestore.FieldValue.serverTimestamp(),
+            dropdown: responses[0],
+            age: responses[1],
+            multipleChoice: responses[2],
+            rating: responses[3]
         })
             .then(() => console.log("Journal entry added successfully."))
             .catch((error) => console.log(error.message))
