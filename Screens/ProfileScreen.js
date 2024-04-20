@@ -49,8 +49,9 @@ const ProfileScreen = ({ navigation, route }) => {
         .then(() =>{ // correct password, proceed with deletion
             user.delete().then(() => {console.log("User deleted successfully.")})
         }).catch((error)=>{console.log(error.message)
-                          alert("Incorrect Password")})
-        .catch((error) => alert("Incorrect Password.")) // incorrect password
+                           alert("Incorrect password.")}) // incorrect password
+        .catch((error) => {console.log(error.message)
+                           alert("Deletion failed.")}) // Other network errors
   }
   return (
       <View>
