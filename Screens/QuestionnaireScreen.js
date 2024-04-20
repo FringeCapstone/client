@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import SelectDropdown from "react-native-select-dropdown";
 import { AirbnbRating } from "react-native-ratings";
 import Checkbox from "expo-checkbox";
+import firebase from "firebase/compat";
 let responses = []; // must declare outside the func to avoid scoping issues
 const QuestionnaireScreen = ({ navigation }) => {
     const [number, onChangeNumber] = React.useState("");
@@ -14,6 +15,15 @@ const QuestionnaireScreen = ({ navigation }) => {
         responses.push(response);
         handleNextQuestion();
         console.log("adding " + response + " to responses.");
+    }
+    function pushResponsesToFirestore() {
+        const firestore = firebase.firestore();
+        const user = firebase.auth().currentUser;
+        firestore.collection("users").doc(user.uid).collection("journalEntries").add({
+            title: "test",
+        })
+            .then(() => console.log("Journal entry added successfully."))
+            .catch((error) => console.log(error.message))
     }
     const handleNextQuestion = () => {
         setCurrentQuestion(currentQuestion + 1);
@@ -140,8 +150,6 @@ const QuestionnaireScreen = ({ navigation }) => {
                         onPress={() => {
                             logRating();
                             handleSubmission(ratingFinal);
-                            for (let i = 0; i < responses.length; i++)
-                                console.log(i + ": " + responses[i]);
                         }}
                     >
                         <Text style={styles.buttonText}>Next</Text>
@@ -154,7 +162,12 @@ const QuestionnaireScreen = ({ navigation }) => {
                     <Text style={styles.questionText}>Finished!</Text>
                     <Pressable
                         style={styles.button}
-                        onPress={() => navigation.navigate("Home")}
+                        onPress={() => {
+                            navigation.navigate("Home");
+                            for (let i = 0; i < responses.length; i++) // debug statement to view responses
+                                console.log(i + ": " + responses[i]);
+                            pushResponsesToFirestore(); // add to user's journal entries
+                        }}
                     >
                         <Text style={styles.buttonText}>Back Home</Text>
                     </Pressable>
