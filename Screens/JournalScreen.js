@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, View} from "react-native";
+import {Button, Modal, Pressable, StyleSheet, Text, View} from "react-native";
 import {useEffect, useState} from "react";
 import {useNavigation} from "@react-navigation/native";
 import {auth} from "../firebase";
@@ -27,22 +27,41 @@ const JournalScreen = ({ navigation }) => {
         .collection("journalEntries").onSnapshot(snapshot => {
           const journalData = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data()}));
           setJournals(journalData);
-        })
+          if (journalData[0])
+            setCurrJournal(journalData[0]);
+        });
 
+    return () => unsubscribe();
   }, []);
+  const handleJournalSelect = (journal) => {
+    setCurrJournal(journal);
+    setModalVisible(true);
+  }
   return (
       <View style={{flex: 1}}>
-        <View style={styles.journalRow}>
-          <Text style={styles.journalDate}>
-            Sep 23, 24
-          </Text>
-        </View>
-        <View style={styles.journalRow}>
-          <Text style={styles.journalDate}>
-            Sep 25, 24
-          </Text>
-        </View>
-
+        {journals.map(journal => (
+            <Button title={currJournal?.date.toDate().toLocaleString()}
+              key={journal.id}
+              onPress={() => {
+                handleJournalSelect(journal);
+              }}
+            />
+        ))}
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => setModalVisible(false)}
+          >
+          <View>
+            <Text> Date: {currJournal?.date.toDate().toLocaleString()}</Text>
+            <Text> Dropdown: {currJournal?.dropdown}</Text>
+            <Text> Age: {currJournal?.age}</Text>
+            <Text> Multiple Choice: {currJournal?.multipleChoice}</Text>
+            <Text> Rating: {currJournal?.rating}</Text>
+            <Button title ="close" onPress={() => setModalVisible(false)}/>
+          </View>
+        </Modal>
         <View style={styles.container}>
           <Pressable
               style={styles.questionnaireButton}
