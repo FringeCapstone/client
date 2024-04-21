@@ -28,6 +28,7 @@ const QuestionnaireScreen = ({ navigation }) => {
         })
             .then(() => console.log("Journal entry added successfully."))
             .catch((error) => console.log(error.message))
+        responses = [];
     }
     const handleNextQuestion = () => {
         setCurrentQuestion(currentQuestion + 1);

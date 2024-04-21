@@ -40,7 +40,7 @@ const JournalScreen = ({ navigation }) => {
   return (
       <View style={{flex: 1}}>
         {journals.map(journal => (
-            <Button title={currJournal?.date.toDate().toLocaleString()}
+            <Button title={journal?.date.toDate().toLocaleString()}
               key={journal.id}
               onPress={() => {
                 handleJournalSelect(journal);
@@ -99,6 +99,12 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     transform: [{ translateX: 0 }, { translateY: -2 }],
   },
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 22,
+  },
   journalRow: {
     margin: 5,
     borderRadius: 20,
@@ -110,6 +116,25 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 5,
     margin: 5,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 35,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: 'center',
   },
 
 });
