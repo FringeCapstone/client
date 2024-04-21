@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   modalText: {
-    marginBottom: 15,
+    margin: 10,
     textAlign: 'center',
   },
 
