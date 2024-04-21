@@ -53,13 +53,15 @@ const JournalScreen = ({ navigation }) => {
           visible={modalVisible}
           onRequestClose={() => setModalVisible(false)}
           >
-          <View>
-            <Text> Date: {currJournal?.date.toDate().toLocaleString()}</Text>
-            <Text> Dropdown: {currJournal?.dropdown}</Text>
-            <Text> Age: {currJournal?.age}</Text>
-            <Text> Multiple Choice: {currJournal?.multipleChoice}</Text>
-            <Text> Rating: {currJournal?.rating}</Text>
+          <View style ={styles.centeredView}>
+          <View style ={styles.modalView}>
+            <Text style={styles.modalText}> Date: {currJournal?.date.toDate().toLocaleString()}</Text>
+            <Text style={styles.modalText}> Dropdown: {currJournal?.dropdown}</Text>
+            <Text style={styles.modalText}> Age: {currJournal?.age}</Text>
+            <Text style={styles.modalText}> Multiple Choice: {currJournal?.multipleChoice}</Text>
+            <Text style={styles.modalText}> Rating: {currJournal?.rating}</Text>
             <Button title ="close" onPress={() => setModalVisible(false)}/>
+          </View>
           </View>
         </Modal>
         <View style={styles.container}>
