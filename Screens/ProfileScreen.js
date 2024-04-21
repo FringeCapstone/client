@@ -37,10 +37,6 @@ const ProfileScreen = ({ navigation, route }) => {
   {
       navigation.replace("PasswordChange");
   }
-  const handleDeletion = () => // helper function to prompt user
-  {
-      setModalVisible(true);
-  }
   const deleteAccount = (password) =>{
     // verifying password
     const user = auth.currentUser;
@@ -72,7 +68,7 @@ const ProfileScreen = ({ navigation, route }) => {
             style={[styles.button, styles.buttonOutline]}>
           <Text style ={styles.buttonOutLineText}> Log Out </Text>
         </TouchableOpacity>
-            <TouchableOpacity onPress={handleDeletion} style={[styles.button, styles.buttonOutline]}>
+            <TouchableOpacity onPress={() => setModalVisible(true)} style={[styles.button, styles.buttonOutline]}>
                 <Text style={styles.buttonOutLineText}> Delete Account </Text>
             </TouchableOpacity>
             <Modal
@@ -90,7 +86,7 @@ const ProfileScreen = ({ navigation, route }) => {
                             secureTextEntry={true}
                             onChangeText={text => setPasswordInput(text)}
                         />
-                        <View style={styles.buttonContainer}>
+                        <View style={styles.modalButtonContainer}>
                             <TouchableOpacity
                                 onPress={() => {
                                     setModalVisible(false);
@@ -157,8 +153,11 @@ const styles = StyleSheet.create({
   greetingText: {
     fontSize: 20,
     fontFamily: "BoldRedHatMono",
-    marginBottom: 20,
+    margin: 10,
     textAlign: 'center'
+  },
+  modalButtonContainer:{
+
   },
   modalView: {
     margin: 20,
