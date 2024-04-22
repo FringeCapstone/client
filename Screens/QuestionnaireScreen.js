@@ -24,7 +24,8 @@ const QuestionnaireScreen = ({ navigation }) => {
             dropdown: responses[0],
             age: responses[1],
             multipleChoice: responses[2],
-            rating: responses[3]
+            rating: responses[3],
+            content: ""
         })
             .then(() => console.log("Journal entry added successfully."))
             .catch((error) => console.log("Error adding entry:" + error.message))
