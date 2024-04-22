@@ -171,7 +171,7 @@ const QuestionnaireScreen = ({ navigation }) => {
                             for (let i = 0; i < responses.length; i++) // debug statement to view responses
                                 console.log(i + ": " + responses[i]);
                             pushResponsesToFirestore(); // add to user's journal entries
-                            navigation.navigate("Journal");
+                            navigation.navigate("Home");
                         }}
                     >
                         <Text style={styles.buttonText}>Back Home</Text>
