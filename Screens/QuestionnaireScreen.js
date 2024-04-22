@@ -168,10 +168,10 @@ const QuestionnaireScreen = ({ navigation }) => {
                     <Pressable
                         style={styles.button}
                         onPress={() => {
-                            navigation.navigate("Journal");
                             for (let i = 0; i < responses.length; i++) // debug statement to view responses
                                 console.log(i + ": " + responses[i]);
                             pushResponsesToFirestore(); // add to user's journal entries
+                            navigation.navigate("Journal");
                         }}
                     >
                         <Text style={styles.buttonText}>Back Home</Text>
