@@ -27,7 +27,7 @@ const QuestionnaireScreen = ({ navigation }) => {
             rating: responses[3]
         })
             .then(() => console.log("Journal entry added successfully."))
-            .catch((error) => console.log(error.message))
+            .catch((error) => console.log("Error adding entry:" + error.message))
         responses = [];
     }
     const handleNextQuestion = () => {

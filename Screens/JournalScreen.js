@@ -8,30 +8,34 @@ const JournalScreen = ({ navigation }) => {
   const [journals, setJournals] = useState([]);
   const [currJournal, setCurrJournal] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
-
+  const myNav = useNavigation();
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user =>
     {
       if (!user){
         alert('Please log in before accessing your journals.');
-        navigation.replace("LogIn");
+        myNav.replace("LogIn");
       }
     })
     return unsubscribe;
-  })
+  }, [myNav])
   useEffect(() => {
     const user = auth.currentUser;
-    const unsubscribe = firebase.firestore()
-        .collection("users").doc(user.uid)
-        .collection("journalEntries").onSnapshot(snapshot => {
-          const journalData = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data()}));
-          setJournals(journalData);
-          if (journalData[0])
-            setCurrJournal(journalData[0]);
-        });
+    if (user){
+      const unsubscribe = firebase.firestore()
+          .collection("users").doc(user?.uid)
+          .collection("journalEntries").onSnapshot(snapshot => {
+            const journalData = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data()}));
+            setJournals(journalData);
+            console.log("GOT HERE:" + journalData);
+            if (journalData[0])
+              setCurrJournal(journalData[0]);
+          });
 
-    return () => unsubscribe();
+      return () => unsubscribe();
+    }
+
   }, []);
   const handleJournalSelect = (journal) => {
     setCurrJournal(journal);
