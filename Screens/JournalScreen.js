@@ -28,7 +28,6 @@ const JournalScreen = ({ navigation }) => {
           .collection("journalEntries").onSnapshot(snapshot => {
             const journalData = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data()}));
             setJournals(journalData);
-            console.log("GOT HERE:" + journalData);
             if (journalData[0])
               setCurrJournal(journalData[0]);
           });
