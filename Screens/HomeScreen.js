@@ -34,9 +34,9 @@ const HomeScreen = ({ navigation }) => {
       />
       <Pressable
         style={styles.navigationButton}
-        onPress={() => navigation.navigate("Products")}
+        onPress={() => navigation.navigate("Research")}
       >
-        <Text style={styles.navigationText}>products</Text>
+        <Text style={styles.navigationText}>research</Text>
       </Pressable>
       <Pressable
         style={styles.navigationButton}
