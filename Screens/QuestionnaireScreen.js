@@ -90,10 +90,13 @@ const QuestionnaireScreen = ({ navigation }) => {
                     </Text>
                     <TextInput
                         style={styles.input}
-                        onChangeText={onChangeNumber}
+                        onChangeText={text => {
+                            onChangeNumber(text)
+                        }}
                         value={number}
                         placeholder="Age"
                         keyboardType="numeric"
+                        autoFocus={true}
                     />
                     <Pressable
                         style={styles.button}
