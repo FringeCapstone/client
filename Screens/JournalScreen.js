@@ -45,6 +45,7 @@ const JournalScreen = ({ navigation }) => {
         {journals.map(journal => (
             <Button title={journal?.date.toDate().toLocaleString()}
               key={journal.id}
+              style = {styles.button}
               onPress={() => {
                 handleJournalSelect(journal);
               }}
@@ -97,6 +98,9 @@ const styles = StyleSheet.create({
     bottom: 20,
     marginLeft: 'auto',
     marginRight: 'auto',
+  },
+  button: {
+    backgroundColor: "black",
   },
   buttonText: {
     color: "white",
