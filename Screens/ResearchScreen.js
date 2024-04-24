@@ -1,63 +1,96 @@
-import {FlatList, StyleSheet, Text, TouchableOpacity, View} from "react-native";
-import {useEffect, useState} from "react";
+import {Button, Modal, ScrollView, StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import {useEffect, useRef, useState} from "react";
 import firebase from "firebase/compat";
 
-const ResearchScreen = ({navigation}) => {
-    const db = firebase.firestore();
-    const [items, setItems] = useState([]);
+const ResearchScreen = () => {
+    const [documents, setDocuments] = useState([]);
+    const [selectedDocument, setSelectedDocument] = useState(null);
+    const [modalVisible, setModalVisible] = useState(false);
+    const scrollViewRef = useRef(null);
 
     useEffect(() => {
-        // Fetch data from Firestore collection
-        const fetchData = async () => {
-            const data = await db.collection('research_blogs').get();
-            setItems(data.docs.map(doc => ({id: doc.id, ...doc.data()})));
+        const fetchDocuments = async () => {
+            const querySnapshot = await firebase.firestore().collection('research_blogs').get();
+            const documentsData = querySnapshot.docs.map(doc => doc.data());
+            setDocuments(documentsData);
         };
-        fetchData();
+        fetchDocuments();
     }, []);
 
+    const handleDocumentPress = (document) => {
+        setSelectedDocument(document);
+        setModalVisible(true);
+    };
+
+    const scrollToTop = () => {
+        if (scrollViewRef.current) {
+            scrollViewRef.current.scrollTo({y: 0, animated: false});
+        }
+    }
+
     return (
-        <View>
-            <Text style={styles.productText}>
-                <FlatList
-                    data={items}
-                    renderItem={({item}) => (
-                        <View style={styles.productRow}>
-                            <TouchableOpacity onPress={() => navigation.navigate('Document', {item})}>
-                                <Text style={styles.productHeader}>{item?.header}</Text>
-                            </TouchableOpacity>
-                        </View>
+        <ScrollView>
+            <Text style={styles.blogText}>
+                {documents.map((document, index) => (
+                    <View key={index} style={styles.blogRow}>
+                        <TouchableOpacity onPress={() => handleDocumentPress(document)}>
+                            <Text style={styles.blogHeader}>{document?.header}</Text>
+                        </TouchableOpacity>
+                        {/*<Button title={document.header} style={styles.blogHeader} onPress={() => handleDocumentPress(document)} />*/}
+                    </View>
+                ))}
+                <Modal
+                    visible={modalVisible}
+                    onRequestClose={() => setModalVisible(false)}
+                    animationType="slide"
+                    onShow={scrollToTop}
+                >
+                    {/* Your pop-up page component */}
+                    {selectedDocument && (
+                            <ScrollView ref={scrollViewRef}>
+                                <Text style={styles.blogHeader}>{selectedDocument?.header} </Text>
+                                <Text>{'\n'}</Text>
+                                <Text>{selectedDocument?.body}</Text>
+                                <Button title="Close" onPress={() => {
+                                    setModalVisible(false)
+                                }}/>
+                            </ScrollView>
                     )}
-                    keyExtractor={item => item.id}
-                />
+                </Modal>
             </Text>
-        </View>
+        </ScrollView>
     );
 };
+
 export default ResearchScreen;
 
 const styles = StyleSheet.create({
-    productRow: {
+    blogRow: {
         margin: 5,
         borderRadius: 20,
         backgroundColor: "lightgrey",
         flexDirection: "row",
         alignItems: "center",
+        width: '100%',
+        justifyContent: 'center',
     },
-    productImage: {
+    blogImage: {
         width: 100,
         height: 100,
         borderRadius: 20,
         padding: 5,
         margin: 5,
     },
-    productText: {
+    blogText: {
         fontFamily: "RegularRedHatMono",
         flex: 1,
         flexWrap: "wrap",
     },
-    productHeader: {
+    blogHeader: {
         fontFamily: "BoldRedHatMono",
         flex: 1,
         flexWrap: "wrap",
+        color: "blue",
+        textAlign: "center",
     },
 });
