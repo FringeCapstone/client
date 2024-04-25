@@ -90,8 +90,8 @@ const JournalScreen = ({ navigation }) => {
             <Text style={styles.modalText}> Products you tried: {currJournal?.multipleChoice ? buildMultipleChoice(currJournal?.multipleChoice) : ""}</Text>
             <Text style={styles.modalText}> Rating: {currJournal?.rating}</Text>
             <Text style={styles.modalText}> Content: {currJournal?.content}</Text>
-            <Button title ="close" onPress={() => setModalVisible(false)}/>
-            <Button title ="delete this entry" onPress={() => {
+            <Button title ="close" style = {styles.modalButton} onPress={() => setModalVisible(false)}/>
+            <Button title ="delete this entry" style = {styles.modalButton} onPress={() => {
               handleDeletion(currJournal)
               setModalVisible(false)}
             }/>
@@ -155,6 +155,9 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 5,
     margin: 5,
+  },
+  modalButton: {
+    margin: 10,
   },
   modalView: {
     margin: 20,
