@@ -20,7 +20,10 @@ const QuestionnaireScreen = ({ navigation }) => {
   const [selectedCheckboxes, setSelectedCheckboxes] = useState([]);
 
   function handleSubmission(response) {
-    responses.push(response);
+    if (response === undefined)
+        responses.push("");
+    else
+        responses.push(response);
     handleNextQuestion();
     console.log("adding " + response + " to responses.");
   }
