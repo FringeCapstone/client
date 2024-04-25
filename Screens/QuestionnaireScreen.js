@@ -77,7 +77,7 @@ const QuestionnaireScreen = ({ navigation }) => {
           <Text style={styles.questionText}>
             {Questions[currentQuestion].question}
           </Text>
-          <View style={styles.answerView}>
+
             <SelectDropdown
               key={currentQuestion}
               buttonStyle={styles.dropdownButton}
@@ -91,7 +91,7 @@ const QuestionnaireScreen = ({ navigation }) => {
                 dropdownRes = selectedItem;
               }}
             />
-          </View>
+
           <Pressable
             style={styles.button}
             onPress={() => handleSubmission(dropdownRes)}
@@ -290,7 +290,7 @@ const styles = StyleSheet.create({
   },
   button: {
     margin: 10,
-    width: "80%",
+    width: "70%",
     height: 50,
     backgroundColor: "#444",
     borderRadius: 8,
@@ -313,17 +313,19 @@ const styles = StyleSheet.create({
     fontFamily: "BoldRedHatMono",
   },
   dropdownButton: {
-    width: "80%",
+    width: "50%",
     height: 50,
     backgroundColor: "#444",
     borderRadius: 8,
     margin: 10,
   },
   dropdown: {
+    height: "auto",
     backgroundColor: "#444",
     borderRadius: 12,
   },
   rowStyle: {
+    padding: 10,
     backgroundColor: "#444",
     borderBottomColor: "#C5C5C5",
   },
