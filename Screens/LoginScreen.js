@@ -9,6 +9,7 @@ const LoginScreen = () =>
     const[email, setEmail] = useState('');
     const[password, setPassword] = useState('');
     const navigation = useNavigation();
+    const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(user =>
@@ -57,13 +58,17 @@ const LoginScreen = () =>
                     onChangeText={text => setEmail(text)}
                     style = {styles.myInput}
                 />
+
                 <TextInput
                     placeholder="Password"
                     value = {password}
                     onChangeText={text => setPassword(text) }
                     style = {styles.myInput}
-                    secureTextEntry
+                    secureTextEntry = {!isPasswordVisible}
                 />
+                <TouchableOpacity onPress={() => setIsPasswordVisible(!isPasswordVisible)}>
+                    <Text> 👁️ </Text>
+                </TouchableOpacity>
 
             </View>
             <View
@@ -100,7 +105,8 @@ const styles ={
         paddingHorizontal: 15,
         paddingVertical: 10,
         borderRadius: 5,
-        marginTop: 5
+        marginTop: 5,
+        width: '100%'
     },
     inputContainer: {
         width: '80%'
@@ -131,6 +137,11 @@ const styles ={
     buttonText: {
         fontWeight: '700',
         fontSize: 16
+    },
+    passwordContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
     }
 
 };
