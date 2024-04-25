@@ -50,8 +50,21 @@ const JournalScreen = ({ navigation }) => {
     return res;
   }
   const handleDeletion = (journal) => {
-
-  }
+    const user = auth.currentUser;
+    if (user) {
+      firebase.firestore()
+          .collection("users").doc(user.uid)
+          .collection("journalEntries").doc(journal.id)
+          .delete()
+          .then(() => {
+            console.log("Journal entry deleted successfully.");
+            setModalVisible(false); // Close the modal after deletion
+          })
+          .catch((error) => {
+            console.error("Error deleting journal entry: ", error);
+          });
+    }
+  };
   return (
       <View style={{flex: 1}}>
         {journals.map(journal => (
@@ -78,7 +91,7 @@ const JournalScreen = ({ navigation }) => {
             <Text style={styles.modalText}> Rating: {currJournal?.rating}</Text>
             <Text style={styles.modalText}> Content: {currJournal?.content}</Text>
             <Button title ="close" onPress={() => setModalVisible(false)}/>
-            <Button title ="delete" onPress={() => {
+            <Button title ="delete this entry" onPress={() => {
               handleDeletion(currJournal)
               setModalVisible(false)}
             }/>
