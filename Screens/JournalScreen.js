@@ -64,6 +64,7 @@ const JournalScreen = ({ navigation }) => {
             <Text style={styles.modalText}> Age: {currJournal?.age}</Text>
             <Text style={styles.modalText}> Multiple Choice: {currJournal?.multipleChoice}</Text>
             <Text style={styles.modalText}> Rating: {currJournal?.rating}</Text>
+            <Text style={styles.modalText}> Content: {currJournal?.content}</Text>
             <Button title ="close" onPress={() => setModalVisible(false)}/>
           </View>
           </View>
