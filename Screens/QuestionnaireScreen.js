@@ -187,7 +187,6 @@ const QuestionnaireScreen = ({ navigation }) => {
             {Questions[currentQuestion].question}
           </Text>
           <TextInput
-            multiline
             numberOfLines={4}
             maxLength={500}
             style={styles.input}
