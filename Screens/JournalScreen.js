@@ -40,12 +40,11 @@ const JournalScreen = ({ navigation }) => {
     setCurrJournal(journal);
     setModalVisible(true);
   }
-  const buildMultipleChoice = (journal) => {
-    let multChoice = journal?.multipleChoice;
+  const buildMultipleChoice = (arr) => {
     let res = "";
-    for (let i = 0; i < multChoice.length; i++)
+    for (let i = 0; i < arr.length; i++)
     {
-      res += multChoice[i];
+      res += arr[i];
       res += " ";
     }
     return res;
@@ -72,7 +71,7 @@ const JournalScreen = ({ navigation }) => {
             <Text style={styles.modalText}> Date: {currJournal?.date.toDate().toLocaleString()}</Text>
             <Text style={styles.modalText}> Product That Helped the Most: {currJournal?.dropdown}</Text>
             <Text style={styles.modalText}> Age: {currJournal?.age}</Text>
-            <Text style={styles.modalText}> Products you tried: {currJournal?.multipleChoice}</Text>
+            <Text style={styles.modalText}> Products you tried: {currJournal?.multipleChoice ? buildMultipleChoice(currJournal?.multipleChoice) : ""}</Text>
             <Text style={styles.modalText}> Rating: {currJournal?.rating}</Text>
             <Text style={styles.modalText}> Content: {currJournal?.content}</Text>
             <Button title ="close" onPress={() => setModalVisible(false)}/>
