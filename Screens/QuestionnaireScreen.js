@@ -189,7 +189,7 @@ const QuestionnaireScreen = ({ navigation }) => {
           <TextInput
             numberOfLines={4}
             maxLength={500}
-            style={styles.input}
+            style={styles.freeTextInput}
             onChangeText={(text) => {
               onChangeText(text);
             }}
@@ -330,6 +330,13 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   input: {
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+    borderRadius: 8,
+  },  
+  freeTextInput: {
+    width: "70%",
     margin: 12,
     borderWidth: 1,
     padding: 10,
