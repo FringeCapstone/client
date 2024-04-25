@@ -49,6 +49,9 @@ const JournalScreen = ({ navigation }) => {
     }
     return res;
   }
+  const handleDeletion = (journal) => {
+
+  }
   return (
       <View style={{flex: 1}}>
         {journals.map(journal => (
@@ -75,6 +78,10 @@ const JournalScreen = ({ navigation }) => {
             <Text style={styles.modalText}> Rating: {currJournal?.rating}</Text>
             <Text style={styles.modalText}> Content: {currJournal?.content}</Text>
             <Button title ="close" onPress={() => setModalVisible(false)}/>
+            <Button title ="delete" onPress={() => {
+              handleDeletion(currJournal)
+              setModalVisible(false)}
+            }/>
           </View>
           </View>
         </Modal>
