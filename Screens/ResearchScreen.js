@@ -1,12 +1,11 @@
 import {Button, Modal, ScrollView, StyleSheet, Text, TouchableOpacity, View} from "react-native";
-import {useEffect, useRef, useState} from "react";
+import {useEffect, useState} from "react";
 import firebase from "firebase/compat";
 
 const ResearchScreen = () => {
     const [documents, setDocuments] = useState([]);
     const [selectedDocument, setSelectedDocument] = useState(null);
     const [modalVisible, setModalVisible] = useState(false);
-    const scrollViewRef = useRef(null);
 
     useEffect(() => {
         const fetchDocuments = async () => {
@@ -22,12 +21,6 @@ const ResearchScreen = () => {
         setModalVisible(true);
     };
 
-    const scrollToTop = () => {
-        if (scrollViewRef.current) {
-            scrollViewRef.current.scrollTo({y: 0, animated: false});
-        }
-    }
-
     return (
         <ScrollView>
             <Text style={styles.blogText}>
@@ -36,25 +29,22 @@ const ResearchScreen = () => {
                         <TouchableOpacity onPress={() => handleDocumentPress(document)}>
                             <Text style={styles.blogHeader}>{document?.header}</Text>
                         </TouchableOpacity>
-                        {/*<Button title={document.header} style={styles.blogHeader} onPress={() => handleDocumentPress(document)} />*/}
                     </View>
                 ))}
                 <Modal
                     visible={modalVisible}
                     onRequestClose={() => setModalVisible(false)}
                     animationType="slide"
-                    onShow={scrollToTop}
                 >
-                    {/* Your pop-up page component */}
                     {selectedDocument && (
-                            <ScrollView ref={scrollViewRef}>
-                                <Text style={styles.blogHeader}>{selectedDocument?.header} </Text>
-                                <Text>{'\n'}</Text>
-                                <Text>{selectedDocument?.body}</Text>
-                                <Button title="Close" onPress={() => {
-                                    setModalVisible(false)
-                                }}/>
-                            </ScrollView>
+                        <ScrollView>
+                            <Text style={styles.blogHeader}>{selectedDocument?.header} </Text>
+                            <Text>{'\n'}</Text>
+                            <Text>{selectedDocument?.body}</Text>
+                            <Button title="Close" onPress={() => {
+                                setModalVisible(false)
+                            }}/>
+                        </ScrollView>
                     )}
                 </Modal>
             </Text>
@@ -73,13 +63,6 @@ const styles = StyleSheet.create({
         alignItems: "center",
         width: '100%',
         justifyContent: 'center',
-    },
-    blogImage: {
-        width: 100,
-        height: 100,
-        borderRadius: 20,
-        padding: 5,
-        margin: 5,
     },
     blogText: {
         fontFamily: "RegularRedHatMono",
